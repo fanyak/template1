@@ -247,13 +247,13 @@
     <style>
         .menu-button.writers.clicked .dropdown-menu {
             animation-name: slideinMenu;
-            animation-duration: 1s;
+            animation-duration: 0.5s;
             animation-fill-mode: forwards;
         }
 
         .menu-button.about.clicked .dropdown-menu {
             animation-name: slideinAbout;
-            animation-duration: 1s;
+            animation-duration: 0.5s;
             animation-fill-mode: forwards;
         }
 
@@ -282,7 +282,7 @@
             }
 
             to {
-                transform: translateX(20px);
+                transform: translateX(16px);
                 opacity: 1;
             }
         }
@@ -525,7 +525,8 @@
                 <div class="footer">
                     <div class="footer-contain">
                         <div class="logo-copy-wrapper">
-                            <div class="copyright">© 2021 App Inc. See <a href="/">privacy</a>, <a href="/">terms</a>
+                            <div class="copyright">© 2021 Fani Akritidou. See <a href="/">privacy</a>, <a
+                                    href="/">terms</a>
                                 and <a href="/">information</a></div>
                         </div>
                         <div class="footer-info">
@@ -567,9 +568,12 @@
                 menuButton.addEventListener('click', (evt) => {
                     console.log(evt)
                     if (menuButton.classList.contains('clicked')) {
-                        menuButton.classList.remove('clicked')
+                        menuButton.classList.remove('clicked');
                     } else {
                         menuButton.classList.add('clicked');
+                        if (aboutButton.classList.contains('clicked')) {
+                            aboutButton.classList.remove('clicked');
+                        }
                     }
                 }, true);
                 aboutButton.addEventListener('click', (evt) => {
@@ -578,6 +582,9 @@
                         aboutButton.classList.remove('clicked')
                     } else {
                         aboutButton.classList.add('clicked');
+                        if (menuButton.classList.contains('clicked')) {
+                            menuButton.classList.remove('clicked');
+                        }
                     }
                 }, true);
             }
@@ -641,8 +648,8 @@
 
 
 
-    <script src="https://unpkg.com/@optimizely/optimizely-sdk@3.5/dist/optimizely.browser.umd.min.js"></script>
-    <script src="https://cdn.optimizely.com/datafiles/5kEkU44ABjPW9geWS8dGD.json/tag.js"></script>
+    <!-- <script src="https://unpkg.com/@optimizely/optimizely-sdk@3.5/dist/optimizely.browser.umd.min.js"></script>
+    <script src="https://cdn.optimizely.com/datafiles/5kEkU44ABjPW9geWS8dGD.json/tag.js"></script> -->
     <script>
         if (window.optimizelySdk && window.optimizelyDatafile) {
             var logLevel = "";
