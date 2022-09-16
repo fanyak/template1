@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>custom properties in linear gradient</title>
+  <style>
+    .tbl {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+}
+
+.tbl div {
+  min-height: 30px;
+  border-bottom: solid 1px #ddd
+}
+@property --a {
+  syntax: '<percentage>'; /* its type */
+  inherits: false;
+  initial-value: 0%; /* the initial value */
+}
+/**/
+.filled {
+  transition: --a 0.5s; /* we add transition to it */
+  background: linear-gradient(to bottom, red var(--a), #fff var(--a) 100%); /* we use it inside the gradient */
+  animation: fill 0.5s linear forwards;
+}
+
+@keyframes fill {
+  from {
+  --a: 0%;
+  }
+  50% {
+    --a: 50%;
+  }
+  to {
+  --a: 100%;
+  }
+}
+/* .filled:hover {
+  --a: 100%
+} */
+  </style>
+</head>
+
+<body>
+  <div class="tbl">
+
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+  </div>
+  <script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+  
+       function addClass(i) {
+         const col = document.querySelector(`.tbl>div:nth-child(${i})`);
+         col.classList.add('filled');
+       }
+       const start = (i) => (end) => {
+    
+       previousTimestamp = 0;
+    
+       function step(timestamp) {
+         done = i > end;
+         const elapsed = timestamp - previousTimestamp;
+
+         if (done) {
+           return;
+         }  
+
+         if (elapsed < 500) {
+           window.requestAnimationFrame(step);
+           return;
+         }
+
+         addClass(i);
+         i+=4;
+         previousTimestamp = timestamp; // restart count
+         window.requestAnimationFrame(step);    
+      }
+       window.requestAnimationFrame(step) 
+      };
+      endAt= start(1)
+      endAt(16)
+
+    });
+  </script>
+</body>
+
+</html>
